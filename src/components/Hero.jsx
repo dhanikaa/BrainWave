@@ -1,4 +1,4 @@
-import { curve } from '../assets';
+import { curve, robot } from '../assets';
 import Button from './Button';
 import Section from './Section'
 
@@ -32,6 +32,16 @@ const Hero = () => {
                 <Button href="/pricing" white>
                     Get started
                 </Button>
+            </div>
+            <div className='relative max-w-[23rem] mx-auto md:max-w-5xl xl:mb-24'>
+                <div className='relativen z-1 p-0.5 rounded-2xl bg-conic-gradient'>
+                    <div className='relative bg-n-8 rounded-[1rem]'>
+                        <div className='h-[1.4rem] bg-n-10 rounded-t-[0.9rem]'>
+                            <div className='aspect-[33/40]'/>
+                            <img src={robot} className="w-full" width={1440} height={1800} alt="hero" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </Section>
