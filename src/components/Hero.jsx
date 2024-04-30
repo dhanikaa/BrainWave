@@ -9,7 +9,7 @@ const Hero = () => {
         customPaddings
         id="hero"
     >Hero</Section>
-  )
-}
+  );
+};
 
 export default Hero
