@@ -2,12 +2,16 @@ FROM node:alpine
 
 WORKDIR /app
 
-COPY package.json package-lock.json /app/
+COPY package.json .
 
 RUN npm install
 
-COPY . /app/
+RUN npm i -g serve
 
-EXPOSE 5173
+COPY . .
 
-CMD [ "npm", "run", "dev" ]
+RUN npm run build
+
+EXPOSE 3000
+
+CMD [ "serve", "-s", "dist" ]
