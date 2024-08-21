@@ -36,4 +36,27 @@ jobs:
 
     steps:
       - name: SSH setup
+        run: |
+          mkdir -p ~/.sshKey/
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/brainwave.pem
+          chmod 600 ~/.ssh/brainwave.pem
+      - name: Installing and starting docker
         run: 
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/brainwave.pem ${{ secrets.SSH_USER}}@${{secrets.SSH_HOST}}.${{ secrets.AWS_REGION}}.compute.amazonaws.com "
+          sudo apt-get update &&
+          sudo apt-get install -y docker.io &&
+          sudo systemctl start docker &&
+          sudo systemctl enable docker
+      - name: Login to EC2 from dockerhub
+        run: 
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/brainwave.pem ${{ secrets.SSH_USER}}@${{secrets.SSH_HOST}}.${{ secrets.AWS_REGION}}.compute.amazonaws.com "
+          sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Run docker image on EC2
+        run:
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/brainwave.pem ${{ secrets.SSH_USER}}@${{secrets.SSH_HOST}}.${{ secrets.AWS_REGION}}.compute.amazonaws.com "
+          sudo docker rmi dhanikaa/brainwave:latest
+          sudo docker stop brainwave || true &&
+          sudo docker rm brainwave || true &&
+          sudo docker pull dhanikaa/brainwave:latest &&
+          sudo docker run --name brainwave-app -d -p 3000:3000 dhanikaa/brainwave:latest
+          " || exit 1
