@@ -37,7 +37,7 @@ jobs:
     steps:
       - name: SSH setup
         run: |
-          mkdir -p ~/.sshKey/
+          mkdir -p ~/.ssh/
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/brainwave.pem
           chmod 600 ~/.ssh/brainwave.pem
       - name: Installing and starting docker
