@@ -45,12 +45,12 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ~/.sshKey/brainwave.pem ec2-user@ec2-13-60-46-30.eu-north-1.compute.amazonaws.com "sudo apt-get update && sudo apt-get install -y docker.io && sudo systemctl start docker && sudo systemctl enable docker" || exit 1
       - name: Login to EC2 from dockerhub
         run: 
-          ssh -o StrictHostKeyChecking=no -i ~/.sshKey/brainwave.pem ec2-user@ec2-13-60-46-30 "
+          ssh -o StrictHostKeyChecking=no -i ~/.sshKey/brainwave.pem ec2-user@ec2-13-60-46-30.eu-north-1.compute.amazonaws.com "
           sudo docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
           " || exit 1
       - name: Run docker image on EC2
         run:
-          ssh -o StrictHostKeyChecking=no -i ~/.sshKey/brainwave.pem ec2-user@ec2-13-60-46-30 "
+          ssh -o StrictHostKeyChecking=no -i ~/.sshKey/brainwave.pem ec2-user@ec2-13-60-46-30.eu-north-1.compute.amazonaws.com "
           sudo docker rmi dhanikaa/brainwave:latest
           sudo docker stop brainwave || true &&
           sudo docker rm brainwave || true &&
