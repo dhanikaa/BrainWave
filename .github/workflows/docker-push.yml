@@ -42,7 +42,7 @@ jobs:
           chmod 600 ~/.sshKey/brainwave.pem
       - name: Installing and starting docker
         run: 
-          ssh -o StrictHostKeyChecking=no -i ~/.sshKey/brainwave.pem ec2-user@ec2-13-60-46-30 "
+          ssh -o StrictHostKeyChecking=no -i ~/.sshKey/brainwave.pem ec2-user@ec2-13-60-46-30 &&
           sudo apt-get update &&
           sudo apt-get install -y docker.io &&
           sudo systemctl start docker &&
