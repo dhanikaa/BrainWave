@@ -6,7 +6,8 @@ on:
       - main
 
 jobs:
-  build:
+  dockerhub-push:
+    name: push the image to dockerhub
     runs-on: ubuntu-latest
 
     steps:
@@ -28,3 +29,11 @@ jobs:
         context: .
         push: true
         tags: dhanikaa/brainwave:latest
+  ec2-push:
+    needs: dockerhub-push
+    name: deploy using ec2
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH setup
+        run: 
