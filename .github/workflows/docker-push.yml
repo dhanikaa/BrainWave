@@ -43,11 +43,11 @@ jobs:
       - name: Installing and starting docker
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/brainwave.pem ec2-user@ec2-13-60-46-30.eu-north-1.compute.amazonaws.com "
-          sudo apt-get update && 
-          sudo apt-get install -y docker.io && 
-          sudo systemctl start docker && 
-          sudo systemctl enable docker" 
-          || exit 1
+          sudo yum update -y &&
+          sudo yum install -y docker &&
+          sudo systemctl start docker &&
+          sudo systemctl enable docker
+          " || exit 1
       - name: Login to EC2 from dockerhub
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/brainwave.pem ec2-user@ec2-13-60-46-30.eu-north-1.compute.amazonaws.com "
