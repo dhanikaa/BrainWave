@@ -50,12 +50,12 @@ jobs:
           " || exit 1
       - name: Login to EC2 from dockerhub
         run: 
-          ssh -o StrictHostKeyChecking=no -i ~/.sshKey/brainwave.pem ${{ secrets.SSH_USER}}@${{secrets.SSH_HOST}} "
-          sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          ssh -o StrictHostKeyChecking=no -i ~/.sshKey/brainwave.pem ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "
+          sudo docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
           " || exit 1
       - name: Run docker image on EC2
         run:
-          ssh -o StrictHostKeyChecking=no -i ~/.sshKey/brainwave.pem ${{ secrets.SSH_USER}}@${{secrets.SSH_HOST}} "
+          ssh -o StrictHostKeyChecking=no -i ~/.sshKey/brainwave.pem ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "
           sudo docker rmi dhanikaa/brainwave:latest
           sudo docker stop brainwave || true &&
           sudo docker rm brainwave || true &&
