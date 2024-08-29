@@ -15,6 +15,6 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/brainwave:latest
-            docker stop myapp || true
-            docker rm myapp || true
-            docker run -d --name myapp -p 80:80 ${{ secrets.DOCKER_USERNAME }}/brainwave:latest
+            docker stop brainwave || true
+            docker rm brainwave || true
+            docker run -d --name brainwave -p 80:80 ${{ secrets.DOCKER_USERNAME }}/brainwave:latest
