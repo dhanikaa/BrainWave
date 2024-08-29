@@ -14,7 +14,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/brainwave:latest
-            docker stop brainwave || true
-            docker rm brainwave || true
-            docker run -d --name brainwave -p 80:80 ${{ secrets.DOCKER_USERNAME }}/brainwave:latest
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/brainwave:latest
+            sudo docker stop brainwave || true
+            sudo docker rm brainwave || true
+            sudo docker run -d --name brainwave -p 80:80 ${{ secrets.DOCKER_USERNAME }}/brainwave:latest
